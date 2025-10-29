@@ -1,0 +1,130 @@
+{
+  "name": "AI Call agent",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ee4b9227-e937-4c87-bb9c-f697af8e64c8",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1pSgZJzRUorg9vDZImg4r5Ay_VH8hmDKkW2UVOULJa5U",
+          "mode": "list",
+          "cachedResultName": "outbound call",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pSgZJzRUorg9vDZImg4r5Ay_VH8hmDKkW2UVOULJa5U/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pSgZJzRUorg9vDZImg4r5Ay_VH8hmDKkW2UVOULJa5U/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "7ade7f90-2558-42d5-95c9-13e314edc8b6",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "leHQC1dvaMttRKVu",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.elevenlabs.io/v1/convai/twilio/outbound-call",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xi-api-key",
+              "value": "xi-api-key"
+            },
+            {
+              "name": "xi-api-key",
+              "value": ""
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "agent_id",
+              "value": ""
+            },
+            {
+              "name": "agent_phone_number_id",
+              "value": ""
+            },
+            {
+              "name": "to_number",
+              "value": "={{ $json.number }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "fd9b9d71-8fb7-454b-95d3-664c7b24b0da",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "61d24c29-8500-4d3b-aae2-353298f8725f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d06e6da9ce11c298bb73cf6eb39aee7873dcc751b1eddd42e06bfb38b868571a"
+  },
+  "id": "qUjm2k0mEf8AJPKP",
+  "tags": []
+}
