@@ -1,0 +1,767 @@
+{
+  "name": "HR Job Posting and Evaluation with AI",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Job Application",
+        "formDescription": "=Fill this for to apply for the role Automation Specialist:\n\nLocation: Remote\nExperience: Minimum 3 years\nEmployment Type: Full-time\n\nJob Description:\nWe are seeking a highly skilled Automation Specialist with at least 3 years of experience in designing and implementing workflow automation solutions. The ideal candidate will have expertise in tools such as n8n, Zapier, Make.com, or similar platforms, and a strong background in integrating APIs, streamlining processes, and enhancing operational efficiency.\n\nKey Responsibilities:\n\n Develop and implement automated workflows to optimize business processes.\n Integrate third-party APIs and systems to create seamless data flow.\n Analyze, debug, and improve existing automation setups.\n Collaborate with cross-functional teams to identify automation opportunities.\n Monitor and maintain automation systems to ensure reliability.\n\nRequired Skills & Qualifications:\n\n Proven 3+ years of experience in workflow automation and integration.\n Proficiency with tools like n8n, Zapier, or Make.com.\n Strong understanding of APIs, webhooks, and data transformation.\n Familiarity with scripting languages (e.g., JavaScript or Python).\n Excellent problem-solving and communication skills.\n\nPreferred Qualifications:\n\n Experience with database management and cloud services.\n Background in business process analysis or RPA tools.\n\nWhy Join Us?\n\n Opportunity to work on cutting-edge automation projects.\n Supportive and collaborative team environment.\n Competitive salary and benefits package.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "First Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Last Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Phone",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Years of experience",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Upload your CV",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Submit",
+          "path": "automation-specialist-application",
+          "ignoreBots": false,
+          "useWorkflowTimezone": true
+        }
+      },
+      "id": "cfe7f582-51cd-43a0-b980-796f2bfe5ce4",
+      "name": "On form submission",
+      "type": "n8n-nodes-base.formTrigger",
+      "position": [
+        -1888,
+        208
+      ],
+      "webhookId": "18f7428c-9990-413f-aff3-bdcca1bbbe2d",
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appANp4XFk8O0r3Kn",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appANp4XFk8O0r3Kn"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblpdl8tBk8jHOElr",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appANp4XFk8O0r3Kn/tblpdl8tBk8jHOElr"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone": "={{ $json.Phone }}",
+            "Name": "={{ $json.Name }}",
+            "email": "={{ $json.email }}",
+            "Experience": "={{ $json.Experience }}",
+            "Applied On": "={{ $json['Applied On'] }}",
+            "CV link": "={{ $json['CV link'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Experience",
+              "displayName": "Experience",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "No hire",
+                  "value": "No hire"
+                },
+                {
+                  "name": "Interviewing",
+                  "value": "Interviewing"
+                },
+                {
+                  "name": "Decision needed",
+                  "value": "Decision needed"
+                },
+                {
+                  "name": "Hire",
+                  "value": "Hire"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Applied On",
+              "displayName": "Applied On",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "CV link",
+              "displayName": "CV link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone interview",
+              "displayName": "Phone interview",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "id": "ecb71f73-cada-4fa6-ac66-9eaaa17cec43",
+      "name": "Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "position": [
+        -1264,
+        208
+      ],
+      "typeVersion": 2.1,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "E4UvKtul37Xanl2Y",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "Upload_your_CV",
+        "name": "={{ $binary.Upload_your_CV.fileName }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1X_KHkNvfmey35AJT356WFtaxUWNLXGs2",
+          "mode": "list",
+          "cachedResultName": "n8n-pdfs-demo",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1X_KHkNvfmey35AJT356WFtaxUWNLXGs2"
+        },
+        "options": {}
+      },
+      "id": "8805038f-c370-4fc9-ae49-be24873a382d",
+      "name": "Upload CV to google drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        -1664,
+        208
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "NVVOI9gBS6WEksAB",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bffff778-859a-4bb8-b973-39237ce7486e",
+              "name": "Name",
+              "type": "string",
+              "value": "={{ $('On form submission').item.json['First Name'] + \" \" + $('On form submission').item.json['Last Name'] }}"
+            },
+            {
+              "id": "cd6e7372-c65f-4e6f-9612-6ea513bb8e15",
+              "name": "Phone",
+              "type": "string",
+              "value": "={{ $('On form submission').item.json.Phone }}"
+            },
+            {
+              "id": "eb19138e-7ff3-4f0c-ad95-ac33f8835717",
+              "name": "email",
+              "type": "string",
+              "value": "={{ $('On form submission').item.json.Email }}"
+            },
+            {
+              "id": "25172db9-91fb-45da-b036-ee9aea1e8b09",
+              "name": "Experience",
+              "type": "number",
+              "value": "={{ $('On form submission').item.json[\"Years of experience\"] }}"
+            },
+            {
+              "id": "64393285-3770-47e0-bbbb-3c5d5e14f1f4",
+              "name": "Applied On",
+              "type": "string",
+              "value": "={{ $('On form submission').item.json.submittedAt }}"
+            },
+            {
+              "id": "dc052fd6-f57d-4da1-9976-67fcd9496e58",
+              "name": "CV link",
+              "type": "string",
+              "value": "={{ $json.webViewLink }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2c9bd7a6-c899-4365-891c-d0c135828e69",
+      "name": "applicant details",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        -1440,
+        208
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "content": "## Grab User Details and Update in Airtable\n",
+        "height": 220,
+        "width": 760,
+        "color": 3
+      },
+      "id": "b4b7529b-e8a7-4f5c-825d-ce22e6785a2f",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1904,
+        128
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Download the CV and get the job description and requirements.\n- ### Send the details to ChatGPT to score the viability of the candidate",
+        "height": 652,
+        "width": 1540
+      },
+      "id": "4cfa732d-6fae-465c-8ab7-65bcfe2ac5b4",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1152,
+        64
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.fields[\"CV Link\"] }} {{ $json.fields['CV link'] }}",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "id": "dd0e78c6-90e3-40a5-aaa5-3b41353c7f56",
+      "name": "download CV",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        -1040,
+        208
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "NVVOI9gBS6WEksAB",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "c51b48c0-4bd1-4d1b-b560-6fd0af6cfd1a",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        -832,
+        208
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Compare the following job description and resume. \nEvaluate whether the resume shows experience or relevance to AI Automation.\nIf yes, recommend the candidate and assign a qualification score between 0 and 1 \n(1 = best match). \n\nRespond in the following format only:\nScore: <value between 0 and 1>\nReason: <less than 20 words>\n\nJob Description: {{ $json.job_description }}\nResume: {{ $json.text }}\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "id": "189f2ed8-588a-48a7-b7d4-8523de6373b7",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        -608,
+        208
+      ],
+      "typeVersion": 1.7
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appANp4XFk8O0r3Kn",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appANp4XFk8O0r3Kn"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbln9c3wzl1mVVNeu",
+          "mode": "list",
+          "cachedResultName": "Positions",
+          "cachedResultUrl": "https://airtable.com/appANp4XFk8O0r3Kn/tbln9c3wzl1mVVNeu"
+        },
+        "options": {}
+      },
+      "id": "44d4cf16-7c68-4521-b157-39820a67e8ab",
+      "name": "Airtable1",
+      "type": "n8n-nodes-base.airtableTool",
+      "position": [
+        -528,
+        448
+      ],
+      "typeVersion": 2.1,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "E4UvKtul37Xanl2Y",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -752,
+        416
+      ],
+      "id": "e42f48c7-ae5c-4880-b0c8-47e7697e5db7",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "hZti3MXdVUXxmIpJ",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Given the following job description and candidate CV, create 5 insightful interview questions to gather more information about the candidate's suitability for the role. The questions should focus on:\n\n Specific projects the candidate has worked on.\n Key responsibilities and achievements in their previous roles.\n Skills relevant to the job description.\n Problem-solving abilities and how they handled challenges.\n Alignment with the company’s goals and values.\n\nProvide the questions in a clear, concise format.\n\nJob Description:\nUse the airtable tool to get the job description\n\nCandidate CV:\n{{ $('Extract from File').item.json.text }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "id": "78f5478c-3c2f-4fc3-b105-e14b92b319b4",
+      "name": "generate questionnaires1",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        1392,
+        16
+      ],
+      "typeVersion": 1.7
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appANp4XFk8O0r3Kn",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appANp4XFk8O0r3Kn"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblpdl8tBk8jHOElr",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appANp4XFk8O0r3Kn/tblpdl8tBk8jHOElr"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2336,
+        160
+      ],
+      "id": "4356908f-3aa9-4da4-9509-6bd2fd0f0c2f",
+      "name": "Search records",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "E4UvKtul37Xanl2Y",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appANp4XFk8O0r3Kn",
+          "mode": "list",
+          "cachedResultName": "Simple applicant tracker",
+          "cachedResultUrl": "https://airtable.com/appANp4XFk8O0r3Kn"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblpdl8tBk8jHOElr",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appANp4XFk8O0r3Kn/tblpdl8tBk8jHOElr"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $('Airtable').item.json.fields.Name }}",
+            "Phone": "={{ $('Airtable').item.json.fields.Phone }}",
+            "email": "={{ $('Airtable').item.json.fields.email }}",
+            "Experience": "={{ $('Airtable').item.json.fields.Experience }}",
+            "Applied On": "={{ $('Airtable').item.json.fields['Applied On'] }}",
+            "CV link": "={{ $('Airtable').item.json.fields['CV link'] }}",
+            "id": "={{ $('Airtable').item.json.id }}",
+            "Result": 2,
+            "Reason": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Experience",
+              "displayName": "Experience",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Applied On",
+              "displayName": "Applied On",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "CV link",
+              "displayName": "CV link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Result",
+              "displayName": "Result",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Reason",
+              "displayName": "Reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -208,
+        256
+      ],
+      "id": "ec868deb-74f8-40f7-a955-9008910661f5",
+      "name": "Update record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "E4UvKtul37Xanl2Y",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Update record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "download CV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "download CV": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "applicant details": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Upload CV to google drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload CV to google drive": {
+      "main": [
+        [
+          {
+            "node": "applicant details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "de933f30-b271-483e-8a06-4474ebdc02b0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d06e6da9ce11c298bb73cf6eb39aee7873dcc751b1eddd42e06bfb38b868571a"
+  },
+  "id": "NhgwGzbN3iJbt8uT",
+  "tags": [
+    {
+      "createdAt": "2025-10-29T18:02:20.601Z",
+      "updatedAt": "2025-10-29T18:02:20.601Z",
+      "id": "igeDoYmike8FpBWQ",
+      "name": "HR"
+    }
+  ]
+}
